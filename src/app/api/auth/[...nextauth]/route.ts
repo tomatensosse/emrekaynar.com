@@ -1,10 +1,7 @@
 import NextAuth, { AuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import bcrypt from 'bcrypt'
-import '@/types/index'
-
-const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -37,6 +34,8 @@ export const authOptions: AuthOptions = {
                 if (!isPasswordValid) {
                     return null;
                 }
+
+                console.debug("Success!");
 
                 return {
                     id: user.id,
