@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# User Management Scripts
 
-## Getting Started
+This directory contains scripts for managing users in the database.
 
-First, run the development server:
+## Add User Script
+
+The `add-user.ts` script allows you to interactively create or update a user in the database.
+
+### How to Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Navigate to the project root
+cd your-project-directory
+
+# Run the script
+npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/add-user.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### What the Script Does
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Asks for a username
+2. Asks for a password (which will be hashed)
+3. Optionally asks for an auto-redirect path (where to send the user after login)
+4. Creates the user if they don't exist, or updates them if they do
+5. Confirms that the user exists in the database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Example Usage
 
-## Learn More
+```
+$ npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/add-user.ts
+Enter username: baneva
+Enter password: blend
+Enter auto redirect path (optional, press Enter to skip): /music/album/clv-lp
+User "baneva" successfully created!
+User exists in database and can be used for login.
 
-To learn more about Next.js, take a look at the following resources:
+User creation process completed.
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+After creating a user, you should be able to log in with the provided credentials.
